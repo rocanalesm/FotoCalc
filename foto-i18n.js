@@ -51,7 +51,7 @@ const I18N = {
     'bulb': 'Más de 30 s: Bulb con cable remoto, {s} s.',
     'astro.note': 'Regla NPF para estrellas puntuales con 36 MP.',
     'ev.label': 'EV {ev}',
-    'footer.made': 'Proyecto Nikon · Roberto Canales', 'footer.ver': 'v1.0',
+    'footer.made': 'Proyecto Nikon · Roberto Canales', 'footer.ver': 'v1.1',
     'lang.switch': 'Switch to English'
   },
   en: {
@@ -105,7 +105,7 @@ const I18N = {
     'bulb': 'Over 30 s: Bulb with a remote cable, {s} s.',
     'astro.note': 'NPF rule for pinpoint stars with 36 MP.',
     'ev.label': 'EV {ev}',
-    'footer.made': 'Nikon project · Roberto Canales', 'footer.ver': 'v1.0',
+    'footer.made': 'Nikon project · Roberto Canales', 'footer.ver': 'v1.1',
     'lang.switch': 'Cambiar a español'
   }
 };

@@ -48,6 +48,24 @@ const LENSES = {
     limiter: { values: ['FULL', '∞–5 m'], threshold: 5 },
     tip: { es: 'Mano izquierda bajo el objetivo, no bajo la cámara: pesa 1,5 kg.', en: 'Left hand under the lens, not the body: it weighs 1.5 kg.' }
   },
+  z2470e: {
+    name: 'AF-S NIKKOR 24-70mm f/2.8E ED VR',
+    short: '24-70 f/2.8E VR',
+    fMin: 24, fMax: 70, maxAp: 2.8, minAp: 22,
+    mfd: 0.38, maxMag: 0.28, filter: 82, weight: 1070,
+    vr: true, vrStops: 4, vrModes: false, macro: false,
+    limiter: null,
+    tip: { es: 'Diafragma electromagnético (E): funciona completo en la D810 y la D800. Enfoque mínimo 0,38 m (0,41 m en los extremos 24 y 70 mm).', en: 'Electromagnetic (E) diaphragm: fully supported by the D810 and D800. Minimum focus 0.38 m (0.41 m at 24 and 70 mm).' }
+  },
+  z2470g: {
+    name: 'AF-S NIKKOR 24-70mm f/2.8G ED',
+    short: '24-70 f/2.8G',
+    fMin: 24, fMax: 70, maxAp: 2.8, minAp: 22,
+    mfd: 0.38, maxMag: 0.27, filter: 77, weight: 900,
+    vr: false, vrStops: 0, vrModes: false, macro: false,
+    limiter: null,
+    tip: { es: 'Sin VR: a pulso, respeta 1/(2 × focal), es decir 1/50 a 24 mm y 1/140 a 70 mm con 36 MP. Usa siempre el parasol: es sensible a los reflejos.', en: 'No VR: hand-held, keep 1/(2 × focal), i.e. 1/50 at 24 mm and 1/140 at 70 mm with 36 MP. Always use the hood: it is flare-prone.' }
+  },
   p50: {
     name: 'AF-S NIKKOR 50mm f/1.8G',
     short: '50 f/1.8G',

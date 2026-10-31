@@ -1,4 +1,4 @@
-# FotoCalc v1.0
+# FotoCalc v1.1
 
 *English version: [README.en.md](README.en.md)*
 
@@ -12,7 +12,8 @@ corre en el navegador: no hay servidor detrás y funciona sin conexión.
 Equipo incluido en esta versión:
 
 - **Cámaras:** Nikon D810 y D800.
-- **Objetivos:** AF-S 70-200mm f/2.8G ED VR II, AF-S 50mm f/1.8G y
+- **Objetivos:** AF-S 24-70mm f/2.8E ED VR, AF-S 24-70mm f/2.8G ED,
+  AF-S 70-200mm f/2.8G ED VR II, AF-S 50mm f/1.8G y
   AF-S VR Micro 105mm f/2.8G IF-ED.
 - **Situaciones:** ceremonia en auditorio (discurso, diploma, desfile,
   público, plano general), exterior con luz de día (retratos en sombra, sol
@@ -75,7 +76,7 @@ una entrada de `SCENES`.
 ## Para actualizar la app
 
 Reemplazar los archivos en el repositorio y **subir el número de versión
-del caché en `sw.js`** (la constante `CACHE`, hoy `fotocalc-v1.0`). Sin
+del caché en `sw.js`** (la constante `CACHE`, hoy `fotocalc-v1.1`). Sin
 ese cambio, a quien ya la tenga instalada le sigue apareciendo la versión
 vieja.
 
@@ -85,7 +86,7 @@ Código bajo licencia **BSD 3-Clause** (archivo `LICENSE`). Nikon, NIKKOR y
 los nombres de los productos son marcas de Nikon Corporation; esta
 aplicación no está afiliada a Nikon.
 
-**Cita sugerida:** R. I. Canales M., *FotoCalc* v1.0, 2026.
+**Cita sugerida:** R. I. Canales M., *FotoCalc* v1.1, 2026.
 
 ## Qué hay en cada archivo
 

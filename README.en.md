@@ -1,4 +1,4 @@
-# FotoCalc v1.0
+# FotoCalc v1.1
 
 *Versión en español: [README.md](README.md)*
 
@@ -12,7 +12,7 @@ offline.
 Gear in this version:
 
 - **Cameras:** Nikon D810 and D800.
-- **Lenses:** AF-S 70-200mm f/2.8G ED VR II, AF-S 50mm f/1.8G and
+- **Lenses:** AF-S 24-70mm f/2.8E ED VR, AF-S 24-70mm f/2.8G ED, AF-S 70-200mm f/2.8G ED VR II, AF-S 50mm f/1.8G and
   AF-S VR Micro 105mm f/2.8G IF-ED.
 - **Situations:** auditorium ceremony, outdoor daylight and general scenes.
 
@@ -41,7 +41,7 @@ It will be live at `https://USERNAME.github.io/FotoCalc/` within a minute.
 ## Updating
 
 Replace the files and **bump the cache version in `sw.js`** (`CACHE`,
-currently `fotocalc-v1.0`), or installed copies keep the old version.
+currently `fotocalc-v1.1`), or installed copies keep the old version.
 
 ## License
 
