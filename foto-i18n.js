@@ -1,0 +1,141 @@
+/* FotoCalc — textos de la interfaz en español e inglés. */
+const I18N = {
+  es: {
+    'app.subtitle': 'Receta en modo M para tu cámara digital',
+    'card.gear': 'Equipo', 'lbl.camera': 'Cámara', 'lbl.lens': 'Objetivo',
+    'card.scene': 'Situación', 'lbl.scene': 'Qué vas a fotografiar',
+    'fine.toggle': 'Ajustes finos (distancia, encuadre, luz)',
+    'lbl.dist': 'Distancia al sujeto (m)', 'lbl.orient': 'Encuadre', 'orient.h': 'Horizontal', 'orient.v': 'Vertical',
+    'lbl.crop': 'Zona de imagen', 'crop.1': 'FX (36 MP)', 'crop.12': '1.2× (25 MP)', 'crop.15': 'DX 1.5× (15 MP)',
+    'lbl.focal': 'Focal', 'focal.auto': 'automática', 'lbl.ev': 'Luz de la escena', 'lbl.aperture': 'Apertura',
+    'ap.auto': 'Según la situación', 'btn.reset': 'Volver a los valores de la situación',
+    'card.recipe': 'Receta (modo M)', 'tile.mode': 'Modo', 'tile.ap': 'Apertura', 'tile.t': 'Velocidad', 'tile.iso': 'ISO',
+    'tile.f': 'Focal', 'tile.af': 'Enfoque',
+    'iso.fixed': 'fijo', 'iso.auto': 'M + ISO auto', 'iso.base': 'base', 'iso.astro': 'fijo',
+    'row.meter': 'Medición', 'row.mark': 'Dónde dejar la marca', 'row.release': 'Disparo', 'row.wb': 'Balance de blancos',
+    'row.picture': 'Picture Control', 'row.indicator': 'Indicador del visor',
+    'meter.spot': 'Puntual (sigue al punto AF)', 'meter.matrix': 'Matricial', 'meter.center': 'Ponderada central',
+    'af.single': 'punto único', 'af.dyn9': 'dinámica 9 puntos', 'af.group': 'zona Grupo', 'af.dyn21': 'dinámica 21 puntos', 'af.manual': 'manual (Live View)',
+    'rel.Q': 'Q · silencioso', 'rel.S': 'S · fotograma a fotograma', 'rel.CL': 'CL · ráfaga lenta', 'rel.CH': 'CH · ráfaga rápida', 'rel.MUP': 'MUP · espejo arriba + cable',
+    'card.warn': 'Avisos',
+    'card.frame': 'Encuadre y profundidad de campo',
+    'frame.size': 'El cuadro cubre', 'frame.at': 'a', 'frame.dof': 'Zona nítida', 'frame.dofTotal': 'profundidad total', 'frame.hyper': 'Hiperfocal',
+    'frame.long': 'Para encuadrar {w} m de ancho necesitarías {fi} mm.',
+    'frame.longCrop': 'Usa la zona de imagen {c} y queda justo.',
+    'frame.longCropMove': 'Aun con la zona {c} queda más amplio: si puedes, acércate a unos {d}; si no, recorta después en NX Studio.',
+    'frame.longMove': 'Acércate a unos {d}, o acepta un encuadre más amplio y recorta después.',
+    'frame.short': 'Con {fmin} mm el cuadro queda más amplio de lo pedido: aléjate a unos {d} o usa un objetivo más angular.',
+    'frame.mag': 'Este objetivo amplía como máximo {m}×: lo más pequeño que llena el cuadro mide {w} de ancho.',
+    'frame.ok': 'El encuadre pedido calza con este objetivo.',
+    'frame.mag1': 'Ampliación {m}×',
+    'card.switches': 'Interruptores del objetivo',
+    'sw.focusMode': 'Enfoque', 'sw.limiter': 'Limitador', 'sw.vr': 'VR', 'sw.vrMode': 'Modo VR',
+    'card.camera': 'Notas de la cámara', 'card.tips': 'Consejos',
+    'calc.toggle': 'Ver cálculo y supuestos',
+    'calc.ev': 'Luz supuesta: EV {ev} a ISO 100 ({lbl}).',
+    'calc.hand': 'Velocidad mínima a pulso con 36 MP: 1/(2 × {fe} mm) = {t0}.',
+    'calc.vr': 'VR: se usan {s} pasos de los {S} que declara Nikon (criterio conservador) → {t}.',
+    'calc.novr': 'Sin VR.',
+    'calc.motion': 'Velocidad mínima por el movimiento del sujeto: {t}.',
+    'calc.coc': 'Círculo de confusión: {c} mm (36 MP).',
+    'calc.disclaimer': 'Es un punto de partida: confirma con el indicador del visor y el histograma.',
+    'warn.mfd': 'Estás más cerca que la distancia mínima de enfoque del objetivo ({v} m).',
+    'warn.diffraction': 'A f/{v} la difracción empieza a ablandar los 36 MP.',
+    'warn.tooBright': 'Demasiada luz para f/{from} con 1/8000: cierra a f/{v} o usa un filtro ND.',
+    'warn.isoHigh': 'ISO {v}: sobre el techo cómodo de 6400. Busca más luz o abre el diafragma si puedes.',
+    'warn.isoExt': 'Haría falta ISO {v}: queda en el máximo; subexpón y recupera en el RAW.',
+    'note.handLimit': 'La velocidad la pone tu pulso, no el sujeto: apóyate o usa monopié para ganar margen.',
+    'note.d800comp': 'D800: en M + ISO auto el botón E no compensa. Si las caras salen oscuras, usa ISO fijo y marca fuera del 0.',
+    'anti.efcs': 'Trípode: VR OFF, cortinilla electrónica (d5) + MUP, cable o temporizador 2 s.',
+    'anti.mup': 'Trípode: VR OFF, MUP o retardo d4, cable o temporizador 2 s.',
+    'bulb': 'Más de 30 s: Bulb con cable remoto, {s} s.',
+    'astro.note': 'Regla NPF para estrellas puntuales con 36 MP.',
+    'ev.label': 'EV {ev}',
+    'footer.made': 'Proyecto Nikon · Roberto Canales', 'footer.ver': 'v1.0',
+    'lang.switch': 'Switch to English'
+  },
+  en: {
+    'app.subtitle': 'Manual-mode recipe for your digital camera',
+    'card.gear': 'Gear', 'lbl.camera': 'Camera', 'lbl.lens': 'Lens',
+    'card.scene': 'Situation', 'lbl.scene': 'What are you shooting',
+    'fine.toggle': 'Fine-tune (distance, framing, light)',
+    'lbl.dist': 'Distance to subject (m)', 'lbl.orient': 'Framing', 'orient.h': 'Landscape', 'orient.v': 'Portrait',
+    'lbl.crop': 'Image area', 'crop.1': 'FX (36 MP)', 'crop.12': '1.2× (25 MP)', 'crop.15': 'DX 1.5× (15 MP)',
+    'lbl.focal': 'Focal length', 'focal.auto': 'automatic', 'lbl.ev': 'Scene light', 'lbl.aperture': 'Aperture',
+    'ap.auto': 'From the situation', 'btn.reset': 'Back to the situation defaults',
+    'card.recipe': 'Recipe (M mode)', 'tile.mode': 'Mode', 'tile.ap': 'Aperture', 'tile.t': 'Shutter', 'tile.iso': 'ISO',
+    'tile.f': 'Focal', 'tile.af': 'Focus',
+    'iso.fixed': 'fixed', 'iso.auto': 'M + Auto ISO', 'iso.base': 'base', 'iso.astro': 'fixed',
+    'row.meter': 'Metering', 'row.mark': 'Where to set the mark', 'row.release': 'Release', 'row.wb': 'White balance',
+    'row.picture': 'Picture Control', 'row.indicator': 'Viewfinder indicator',
+    'meter.spot': 'Spot (follows the AF point)', 'meter.matrix': 'Matrix', 'meter.center': 'Centre-weighted',
+    'af.single': 'single point', 'af.dyn9': '9-point dynamic', 'af.group': 'Group area', 'af.dyn21': '21-point dynamic', 'af.manual': 'manual (Live View)',
+    'rel.Q': 'Q · quiet', 'rel.S': 'S · single frame', 'rel.CL': 'CL · low-speed burst', 'rel.CH': 'CH · high-speed burst', 'rel.MUP': 'MUP · mirror up + cable',
+    'card.warn': 'Warnings',
+    'card.frame': 'Framing and depth of field',
+    'frame.size': 'The frame covers', 'frame.at': 'at', 'frame.dof': 'Sharp zone', 'frame.dofTotal': 'total depth', 'frame.hyper': 'Hyperfocal',
+    'frame.long': 'To frame {w} m wide you would need {fi} mm.',
+    'frame.longCrop': 'Use the {c} image area and it fits.',
+    'frame.longCropMove': 'Even with {c} it stays wider: move to about {d} if you can, or crop later in NX Studio.',
+    'frame.longMove': 'Move to about {d}, or frame wider and crop later.',
+    'frame.short': 'At {fmin} mm the frame is wider than requested: step back to about {d} or use a wider lens.',
+    'frame.mag': 'This lens reaches {m}× at most: the smallest thing that fills the frame is {w} wide.',
+    'frame.ok': 'The requested framing fits this lens.',
+    'frame.mag1': 'Magnification {m}×',
+    'card.switches': 'Lens switches',
+    'sw.focusMode': 'Focus', 'sw.limiter': 'Limiter', 'sw.vr': 'VR', 'sw.vrMode': 'VR mode',
+    'card.camera': 'Camera notes', 'card.tips': 'Tips',
+    'calc.toggle': 'Show calculation and assumptions',
+    'calc.ev': 'Assumed light: EV {ev} at ISO 100 ({lbl}).',
+    'calc.hand': 'Minimum hand-held speed with 36 MP: 1/(2 × {fe} mm) = {t0}.',
+    'calc.vr': 'VR: {s} of Nikon’s claimed {S} stops are used (conservative) → {t}.',
+    'calc.novr': 'No VR.',
+    'calc.motion': 'Minimum speed for subject motion: {t}.',
+    'calc.coc': 'Circle of confusion: {c} mm (36 MP).',
+    'calc.disclaimer': 'A starting point: confirm with the viewfinder indicator and the histogram.',
+    'warn.mfd': 'You are closer than the lens minimum focus distance ({v} m).',
+    'warn.diffraction': 'At f/{v} diffraction starts to soften 36 MP.',
+    'warn.tooBright': 'Too bright for f/{from} at 1/8000: stop down to f/{v} or use an ND filter.',
+    'warn.isoHigh': 'ISO {v}: above the comfortable ceiling of 6400. Find more light or open up if you can.',
+    'warn.isoExt': 'It would need ISO {v}: capped at the maximum; underexpose and recover in RAW.',
+    'note.handLimit': 'Your hands set the speed, not the subject: brace yourself or use a monopod.',
+    'note.d800comp': 'D800: in M + Auto ISO the E button does not compensate. If faces come out dark, use fixed ISO and set the mark off 0.',
+    'anti.efcs': 'Tripod: VR OFF, electronic front curtain (d5) + MUP, cable or 2 s timer.',
+    'anti.mup': 'Tripod: VR OFF, MUP or d4 exposure delay, cable or 2 s timer.',
+    'bulb': 'Over 30 s: Bulb with a remote cable, {s} s.',
+    'astro.note': 'NPF rule for pinpoint stars with 36 MP.',
+    'ev.label': 'EV {ev}',
+    'footer.made': 'Nikon project · Roberto Canales', 'footer.ver': 'v1.0',
+    'lang.switch': 'Cambiar a español'
+  }
+};
+
+const EV_LABELS = [
+  [-99, { es: 'cielo nocturno', en: 'night sky' }],
+  [0,   { es: 'ciudad de noche', en: 'city at night' }],
+  [4,   { es: 'interior con poca luz', en: 'dim interior' }],
+  [6,   { es: 'auditorio, público', en: 'auditorium, audience' }],
+  [7,   { es: 'escenario iluminado', en: 'lit stage' }],
+  [8.5, { es: 'interior luminoso, ventana', en: 'bright interior, window' }],
+  [10.5,{ es: 'hora dorada', en: 'golden hour' }],
+  [11.5,{ es: 'sombra abierta', en: 'open shade' }],
+  [12.5,{ es: 'nublado', en: 'overcast' }],
+  [13.5,{ es: 'sol velado', en: 'hazy sun' }],
+  [14.5,{ es: 'sol pleno', en: 'full sun' }],
+  [15.5,{ es: 'sol en arena o nieve', en: 'sun on sand or snow' }]
+];
+function evLabel(ev, lang) { let l = EV_LABELS[0][1]; for (const [th, v] of EV_LABELS) if (ev >= th) l = v; return l[lang]; }
+
+let LANG = 'es';
+try { const s = localStorage.getItem('fotocalc.lang'); if (s === 'en' || s === 'es') LANG = s; } catch (e) {}
+function t(key, vars) {
+  let s = (I18N[LANG] && I18N[LANG][key]) || I18N.es[key] || key;
+  if (vars) for (const k in vars) s = s.split('{' + k + '}').join(vars[k]);
+  return s;
+}
+function applyI18n() {
+  document.documentElement.lang = LANG;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+  const b = document.getElementById('lang-toggle');
+  if (b) { b.textContent = LANG === 'es' ? 'EN' : 'ES'; b.title = t('lang.switch'); b.setAttribute('aria-label', t('lang.switch')); }
+}

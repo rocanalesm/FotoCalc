@@ -1,0 +1,14 @@
+{
+  "name": "FotoCalc",
+  "short_name": "FotoCalc",
+  "description": "Receta de exposición en modo M para Nikon D810 y D800 según objetivo y situación. | Manual-mode exposure recipe for Nikon D810 and D800 by lens and situation.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFFFFF",
+  "theme_color": "#202428",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#202428">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="FotoCalc">
+<meta name="description" content="Receta de exposición en modo M para Nikon D810 y D800 según objetivo y situación.">
+<title>FotoCalc</title>
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
+<style>
+  /* =========================================================================
+     Paleta de las fichas del Proyecto Nikon:
+       amarillo #E6A100  gris #202428  azul #1A5276  verde #1E8449  rojo #B03A2E
+     Tema claro por defecto; el bloque prefers-color-scheme redefine solo los roles.
+     ========================================================================= */
+  :root{
+    --amarillo:#E6A100; --gris:#202428; --azul:#1A5276; --verde:#1E8449; --rojo:#B03A2E; --violeta:#3A2F6B;
+    --bg:#ffffff; --panel:#ffffff; --panel2:#f4f6f8; --panel3:#f9fafb;
+    --text:#1b2127; --muted:#5d6873; --border:#dde2e7; --border-soft:#eceff2;
+    --accent:#9a6b00; --accent-hi:#E6A100; --accent-wash:rgba(230,161,0,.12); --accent-soft:rgba(230,161,0,.4);
+    --header-bg:#202428; --header-fg:#ffffff; --header-sub:#c9ced4;
+    --shadow:0 1px 2px rgba(32,36,40,.06), 0 1px 8px rgba(32,36,40,.05);
+    --bad:#B03A2E; --bad-wash:rgba(176,58,46,.08); --warn:#a8620a; --warn-wash:rgba(230,161,0,.12); --info:#1A5276; --info-wash:rgba(26,82,118,.08);
+    --ok:#1E8449;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#121518; --panel:#1b1f23; --panel2:#252a30; --panel3:#15181b;
+      --text:#e9edf1; --muted:#a3adb7; --border:#323941; --border-soft:#2a3037;
+      --accent:#f0b429; --accent-hi:#f5c451; --accent-wash:rgba(230,161,0,.14); --accent-soft:rgba(230,161,0,.45);
+      --header-bg:#1b1f23; --header-sub:#a3adb7; --shadow:none;
+      --bad:#f0908c; --bad-wash:rgba(240,144,140,.10); --warn:#f0b429; --warn-wash:rgba(240,180,41,.10); --info:#8fc3e8; --info-wash:rgba(143,195,232,.10);
+      --ok:#7fd39a;
+    }
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:15px;line-height:1.45}
+  header{position:sticky;top:0;background:var(--header-bg);color:var(--header-fg);padding:12px 16px;
+    border-bottom:3px solid var(--amarillo);z-index:10;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .brand{display:flex;align-items:center;gap:10px;min-width:0}
+  .brand img{height:36px;width:36px;border-radius:8px;flex-shrink:0}
+  header h1{margin:0;font-size:18px;font-weight:700;letter-spacing:.01em}
+  header .sub{font-size:12px;color:var(--header-sub)}
+  #lang-toggle{background:transparent;color:var(--header-fg);border:1px solid rgba(255,255,255,.45);border-radius:8px;
+    padding:6px 12px;font-size:13px;font-weight:600;letter-spacing:.05em;cursor:pointer;font-family:inherit;flex-shrink:0}
+  #lang-toggle:hover{background:var(--amarillo);color:var(--gris);border-color:var(--amarillo)}
+  main{padding:14px;padding-bottom:60px;max-width:760px;margin:0 auto}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:var(--shadow)}
+  .card h2{margin:0 0 10px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+  label{display:block;font-size:12px;color:var(--muted);margin:8px 0 4px}
+  select,input[type=number]{width:100%;padding:11px 12px;background:var(--panel2);color:var(--text);border:1px solid var(--border);
+    border-radius:8px;font-size:15px;font-family:inherit}
+  select:focus,input:focus{outline:none;border-color:var(--accent-hi);box-shadow:0 0 0 3px var(--accent-wash)}
+  input[type=range]{width:100%;accent-color:var(--amarillo)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media (max-width:520px){ .row{grid-template-columns:1fr} }
+  .seg{display:flex;gap:4px}
+  .seg button{flex:1;padding:9px 6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);border-radius:8px;
+    font-size:13px;cursor:pointer;font-family:inherit}
+  .seg button.active{background:var(--gris);color:#fff;border-color:var(--gris);font-weight:600}
+  @media (prefers-color-scheme: dark){ .seg button.active{background:var(--amarillo);color:#1b1f23;border-color:var(--amarillo)} }
+  .val{font-size:12px;color:var(--text);font-weight:600;float:right}
+  details.fine summary,details.calc summary{cursor:pointer;color:var(--accent);font-size:13px;font-weight:600;list-style:none;
+    display:flex;align-items:center;gap:6px;padding:4px 0}
+  details summary::-webkit-details-marker{display:none}
+  details summary .arrow{transition:transform .2s;display:inline-block}
+  details[open] summary .arrow{transform:rotate(90deg)}
+  .linkbtn{background:none;border:none;color:var(--accent);font-size:12px;padding:8px 0 0;cursor:pointer;font-family:inherit;text-decoration:underline}
+  /* receta */
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+  .tile{border-radius:10px;padding:8px 6px;text-align:center;color:#fff;min-height:74px;display:flex;flex-direction:column;justify-content:center}
+  .tile .tl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.9}
+  .tile .tv{font-size:22px;font-weight:700;line-height:1.15;font-variant-numeric:tabular-nums}
+  .tile .ts{font-size:11px;opacity:.9}
+  .t-mode{background:var(--gris)} .t-ap{background:var(--rojo)} .t-t{background:var(--azul)}
+  .t-iso{background:#b07c00} .t-f{background:var(--violeta)} .t-af{background:var(--verde)}
+  @media (prefers-color-scheme: dark){ .t-mode{background:#3a4149} }
+  table.props{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+  table.props td{padding:7px 4px;border-bottom:1px solid var(--border-soft);vertical-align:top}
+  table.props td:first-child{color:var(--muted);width:38%}
+  ul.list{margin:0;padding-left:18px} ul.list li{margin:4px 0}
+  ul.warn{list-style:none;padding:0;margin:0}
+  ul.warn li{padding:8px 10px;border-radius:8px;margin:6px 0;font-size:14px;border-left:3px solid}
+  ul.warn li.bad{background:var(--bad-wash);border-color:var(--bad)}
+  ul.warn li.warn{background:var(--warn-wash);border-color:var(--warn)}
+  ul.warn li.info{background:var(--info-wash);border-color:var(--info)}
+  #frame-body p{margin:6px 0}
+  #frame-body p.adv{background:var(--warn-wash);border-left:3px solid var(--warn);padding:8px 10px;border-radius:8px}
+  #frame-body p.ok{color:var(--ok)}
+  .muted{color:var(--muted);font-size:13px}
+  .dofbar{display:flex;justify-content:space-between;gap:10px;background:var(--panel2);border-radius:8px;padding:8px 10px;margin-top:8px;font-size:14px}
+  .dof-lbl{color:var(--muted)} .dof-val{font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+  .switches{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:6px}
+  .sw{background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column}
+  .sw span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .sw b{font-size:16px}
+  .calc-body{margin-top:8px;padding:10px;background:var(--panel3);border:1px solid var(--border);border-radius:8px;font-size:12.5px;
+    font-family:"SF Mono",Menlo,Consolas,monospace;line-height:1.6;overflow-x:auto}
+  .footer{text-align:center;color:var(--muted);font-size:11px;margin-top:20px;padding:14px;line-height:1.6}
+  .footer a{color:var(--accent);text-decoration:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <img src="icon-192.png" alt="">
+    <div>
+      <h1>FotoCalc</h1>
+      <div class="sub" data-i18n="app.subtitle">Receta en modo M para tu cámara digital</div>
+    </div>
+  </div>
+  <button id="lang-toggle" type="button">EN</button>
+</header>
+<main>
+
+<div class="card">
+  <h2 data-i18n="card.gear">Equipo</h2>
+  <div class="row">
+    <div><label for="cam" data-i18n="lbl.camera">Cámara</label><select id="cam"></select></div>
+    <div><label for="lens" data-i18n="lbl.lens">Objetivo</label><select id="lens"></select></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2 data-i18n="card.scene">Situación</h2>
+  <label for="scene" data-i18n="lbl.scene">Qué vas a fotografiar</label>
+  <select id="scene"></select>
+  <details class="fine" style="margin-top:12px">
+    <summary><span class="arrow">&#9656;</span><span data-i18n="fine.toggle">Ajustes finos</span></summary>
+    <div class="row">
+      <div><label for="dist" data-i18n="lbl.dist">Distancia al sujeto (m)</label><input type="number" id="dist" min="0.1" step="0.1" inputmode="decimal"></div>
+      <div><label data-i18n="lbl.orient">Encuadre</label>
+        <div class="seg" id="orient"><button type="button" data-v="h" data-i18n="orient.h">Horizontal</button><button type="button" data-v="v" data-i18n="orient.v">Vertical</button></div></div>
+    </div>
+    <label data-i18n="lbl.crop">Zona de imagen</label>
+    <div class="seg" id="crop"><button type="button" data-v="1" data-i18n="crop.1">FX</button><button type="button" data-v="1.2" data-i18n="crop.12">1.2×</button><button type="button" data-v="1.5" data-i18n="crop.15">DX</button></div>
+    <div id="focal-wrap"><label for="focal"><span data-i18n="lbl.focal">Focal</span> <span class="val" id="focal-val"></span></label><input type="range" id="focal" step="1"></div>
+    <label for="ev"><span data-i18n="lbl.ev">Luz de la escena</span> <span class="val" id="ev-val"></span></label>
+    <input type="range" id="ev" step="0.5">
+    <label for="aperture" data-i18n="lbl.aperture">Apertura</label><select id="aperture"></select>
+    <button class="linkbtn" id="reset" type="button" data-i18n="btn.reset">Volver a los valores de la situación</button>
+  </details>
+</div>
+
+<div class="card">
+  <h2 data-i18n="card.recipe">Receta (modo M)</h2>
+  <div class="tiles" id="tiles"></div>
+  <table class="props" id="recipe-rows"></table>
+</div>
+
+<div class="card" id="warn-card">
+  <h2 data-i18n="card.warn">Avisos</h2>
+  <ul class="warn" id="warn-list"></ul>
+</div>
+
+<div class="card">
+  <h2 data-i18n="card.frame">Encuadre y profundidad de campo</h2>
+  <div id="frame-body"></div>
+</div>
+
+<div class="card">
+  <h2 data-i18n="card.switches">Interruptores del objetivo</h2>
+  <div class="switches" id="switches"></div>
+  <p class="muted" id="lens-tip"></p>
+</div>
+
+<div class="card">
+  <h2 data-i18n="card.tips">Consejos</h2>
+  <ul class="list" id="tips"></ul>
+</div>
+
+<div class="card">
+  <h2 data-i18n="card.camera">Notas de la cámara</h2>
+  <ul class="list" id="cam-notes"></ul>
+  <details class="calc" style="margin-top:10px">
+    <summary><span class="arrow">&#9656;</span><span data-i18n="calc.toggle">Ver cálculo y supuestos</span></summary>
+    <div class="calc-body" id="calc-body"></div>
+  </details>
+</div>
+
+<div class="footer">
+  <span data-i18n="footer.made">Proyecto Nikon · Roberto Canales</span> &middot; <span data-i18n="footer.ver">v1.0</span>
+</div>
+</main>
+
+<script src="foto-i18n.js"></script>
+<script src="foto-data.js"></script>
+<script src="foto-engine.js"></script>
+<script src="foto-ui.js"></script>
+</body>
+</html>
