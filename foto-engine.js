@@ -12,6 +12,13 @@ const ISOS = [32,40,50,64,80,100,125,160,200,250,320,400,500,640,800,1000,1250,1
 
 const log2 = x => Math.log(x) / Math.LN2;
 
+/* Apertura máxima a una focal dada (zooms de apertura variable). */
+function maxApFor(lens, f) {
+  if (!lens.maxApTele || lens.fMin === lens.fMax) return lens.maxAp;
+  const x = (Math.log(f) - Math.log(lens.fMin)) / (Math.log(lens.fMax) - Math.log(lens.fMin));
+  return lens.maxAp + (lens.maxApTele - lens.maxAp) * Math.min(Math.max(x, 0), 1);
+}
+
 /* El tiempo estándar más largo que no supera t (más rápido o igual). */
 function shutterAtMost(t) {
   for (let i = SHUTTERS.length - 1; i >= 0; i--) if (SHUTTERS[i] <= t * 1.04) return SHUTTERS[i];
@@ -92,8 +99,9 @@ function computeRecipe(cam, lens, scene, opt) {
   if (dist < lens.mfd && scene.mode !== 'astro') { out.warnings.push({ key: 'mfd', v: lens.mfd }); }
 
   /* 2 · Apertura */
-  let N = scene.ap === 'wide' ? lens.maxAp : Math.max(scene.ap, lens.maxAp);
-  if (opt.aperture) N = Math.max(opt.aperture, lens.maxAp);
+  const apMax = maxApFor(lens, f);
+  let N = scene.ap === 'wide' ? apMax : Math.max(scene.ap, apMax);
+  if (opt.aperture) N = Math.max(opt.aperture, apMax);
   N = apertureAtLeast(N);
   if (N > 11) out.warnings.push({ key: 'diffraction', v: N });
 
@@ -180,4 +188,4 @@ function computeRecipe(cam, lens, scene, opt) {
   return out;
 }
 
-if (typeof module !== 'undefined') module.exports = { computeRecipe, dof, fmtShutter, fmtNum, fmtDist, nearest, SHUTTERS, ISOS, APERTURES };
+if (typeof module !== 'undefined') module.exports = { computeRecipe, maxApFor, apertureAtLeast, shutterAtMost, dof, fmtShutter, fmtNum, fmtDist, nearest, SHUTTERS, ISOS, APERTURES };

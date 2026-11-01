@@ -40,6 +40,7 @@ const CAMERAS = {
 /* --------------------------------------------------------------- OBJETIVOS */
 const LENSES = {
   z70200: {
+    mount: 'G', afs: true,
     name: 'AF-S NIKKOR 70-200mm f/2.8G ED VR II',
     short: '70-200 f/2.8 VR II',
     fMin: 70, fMax: 200, maxAp: 2.8, minAp: 22,
@@ -49,6 +50,7 @@ const LENSES = {
     tip: { es: 'Mano izquierda bajo el objetivo, no bajo la cámara: pesa 1,5 kg.', en: 'Left hand under the lens, not the body: it weighs 1.5 kg.' }
   },
   z2470e: {
+    mount: 'E', afs: true,
     name: 'AF-S NIKKOR 24-70mm f/2.8E ED VR',
     short: '24-70 f/2.8E VR',
     fMin: 24, fMax: 70, maxAp: 2.8, minAp: 22,
@@ -58,6 +60,7 @@ const LENSES = {
     tip: { es: 'Diafragma electromagnético (E): funciona completo en la D810 y la D800. Enfoque mínimo 0,38 m (0,41 m en los extremos 24 y 70 mm).', en: 'Electromagnetic (E) diaphragm: fully supported by the D810 and D800. Minimum focus 0.38 m (0.41 m at 24 and 70 mm).' }
   },
   z2470g: {
+    mount: 'G', afs: true,
     name: 'AF-S NIKKOR 24-70mm f/2.8G ED',
     short: '24-70 f/2.8G',
     fMin: 24, fMax: 70, maxAp: 2.8, minAp: 22,
@@ -67,6 +70,7 @@ const LENSES = {
     tip: { es: 'Sin VR: a pulso, respeta 1/(2 × focal), es decir 1/50 a 24 mm y 1/140 a 70 mm con 36 MP. Usa siempre el parasol: es sensible a los reflejos.', en: 'No VR: hand-held, keep 1/(2 × focal), i.e. 1/50 at 24 mm and 1/140 at 70 mm with 36 MP. Always use the hood: it is flare-prone.' }
   },
   p50: {
+    mount: 'G', afs: true,
     name: 'AF-S NIKKOR 50mm f/1.8G',
     short: '50 f/1.8G',
     fMin: 50, fMax: 50, maxAp: 1.8, minAp: 16,
@@ -75,7 +79,28 @@ const LENSES = {
     limiter: null,
     tip: { es: 'Rinde mejor desde f/2.8; a f/1.8 el plano de foco mide pocos centímetros.', en: 'Sharpest from f/2.8; at f/1.8 the plane of focus is only centimetres deep.' }
   },
+  k3570: {
+    mount: 'AIS', afs: false,
+    name: 'Nikon Zoom 35-70mm f/3.5-4.8 (kit FM10)',
+    short: '35-70 kit FM10',
+    fMin: 35, fMax: 70, maxAp: 3.5, maxApTele: 4.8, minAp: 22,
+    mfd: 0.4, maxMag: 0.17, filter: 52, weight: 200,
+    vr: false, vrStops: 0, vrModes: false, macro: false, manualFocus: true,
+    limiter: null,
+    tip: { es: 'Enfoque manual y apertura variable: f/3.5 a 35 mm, f/4.8 a 70 mm. No tiene CPU: en las digitales ingresa sus datos en «Datos objetivo sin CPU».', en: 'Manual focus, variable aperture: f/3.5 at 35 mm, f/4.8 at 70 mm. No CPU: on the digital bodies enter it under “Non-CPU lens data”.' }
+  },
+  d50: {
+    mount: 'D', afs: false,
+    name: 'AF Nikkor 50mm f/1.8D',
+    short: '50 f/1.8D',
+    fMin: 50, fMax: 50, maxAp: 1.8, minAp: 22,
+    mfd: 0.45, maxMag: 0.15, filter: 52, weight: 155,
+    vr: false, vrStops: 0, vrModes: false, macro: false,
+    limiter: null,
+    tip: { es: 'AF-D con anillo de diafragma: déjalo en f/22 en la F-100 y la F-601 (el diafragma se maneja desde la cámara); en la FM10 se usa el anillo y se enfoca a mano.', en: 'AF-D with aperture ring: lock it at f/22 on the F100 and F-601 (aperture set from the body); on the FM10 use the ring and focus by hand.' }
+  },
   m105: {
+    mount: 'G', afs: true,
     name: 'AF-S VR Micro-NIKKOR 105mm f/2.8G IF-ED',
     short: '105 Micro VR',
     fMin: 105, fMax: 105, maxAp: 2.8, minAp: 32,

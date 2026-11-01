@@ -1,8 +1,8 @@
-# FotoCalc v1.1
+# FotoCalc v1.2
 
 *Versión en español: [README.md](README.md)*
 
-A **manual-mode (M)** exposure calculator for Nikon digital cameras. Pick a
+A **manual-mode (M)** exposure calculator for Nikon digital and film cameras. Pick a
 camera, a lens and a situation, and it returns the full recipe: aperture,
 shutter speed, ISO, focal length, focus, metering and where to set the
 indicator mark, plus framing, depth of field, lens switch positions and tips
@@ -15,6 +15,15 @@ Gear in this version:
 - **Lenses:** AF-S 24-70mm f/2.8E ED VR, AF-S 24-70mm f/2.8G ED, AF-S 70-200mm f/2.8G ED VR II, AF-S 50mm f/1.8G and
   AF-S VR Micro 105mm f/2.8G IF-ED.
 - **Situations:** auditorium ceremony, outdoor daylight and general scenes.
+
+## Film mode
+
+The **Digital / Film** switch moves to the Nikon FM10, F-601 and F100 with
+13 film stocks (Ilford, Fujifilm, Foma, Kodak, Lucky). ISO is the film's EI
+(half box speed by default, box, or push/pull), reciprocity is corrected from
+manufacturer data, each camera's real shutter steps are used, and lens
+compatibility follows Nikon's official chart (G lenses cannot be used on the
+FM10 or F-601; E lenses do not work on any film body).
 
 ## How it calculates
 
@@ -41,7 +50,7 @@ It will be live at `https://USERNAME.github.io/FotoCalc/` within a minute.
 ## Updating
 
 Replace the files and **bump the cache version in `sw.js`** (`CACHE`,
-currently `fotocalc-v1.1`), or installed copies keep the old version.
+currently `fotocalc-v1.2`), or installed copies keep the old version.
 
 ## License
 

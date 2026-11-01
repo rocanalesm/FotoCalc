@@ -1,13 +1,14 @@
 /* Service Worker — FotoCalc
    Cachea los archivos para uso sin conexión (en terreno).
 */
-const CACHE = 'fotocalc-v1.1';   // sigue el número de versión de la app
+const CACHE = 'fotocalc-v1.2';   // sigue el número de versión de la app
 const ASSETS = [
   './',
   './index.html',
   './foto-i18n.js',
   './foto-data.js',
   './foto-engine.js',
+  './foto-film.js',
   './foto-ui.js',
   './manifest.json',
   './icon-192.png',

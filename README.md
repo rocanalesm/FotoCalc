@@ -1,8 +1,8 @@
-# FotoCalc v1.1
+# FotoCalc v1.2
 
 *English version: [README.en.md](README.en.md)*
 
-Calculadora de exposición en **modo M** para cámaras digitales Nikon.
+Calculadora de exposición en **modo M** para cámaras Nikon digitales y de película.
 Eliges cámara, objetivo y situación, y te entrega la receta completa:
 apertura, velocidad, ISO, focal, enfoque, medición y dónde dejar la marca
 del indicador, más el encuadre, la profundidad de campo, la posición de
@@ -12,13 +12,32 @@ corre en el navegador: no hay servidor detrás y funciona sin conexión.
 Equipo incluido en esta versión:
 
 - **Cámaras:** Nikon D810 y D800.
+- **Cámaras de película:** Nikon FM10, F-601 y F100 (13 rollos).
 - **Objetivos:** AF-S 24-70mm f/2.8E ED VR, AF-S 24-70mm f/2.8G ED,
   AF-S 70-200mm f/2.8G ED VR II, AF-S 50mm f/1.8G y
-  AF-S VR Micro 105mm f/2.8G IF-ED.
+  AF-S VR Micro 105mm f/2.8G IF-ED, AF 50mm f/1.8D y el zoom 35-70 de la FM10.
 - **Situaciones:** ceremonia en auditorio (discurso, diploma, desfile,
   público, plano general), exterior con luz de día (retratos en sombra, sol
   y hora dorada, grupo, edificio, birretes, detalles) y otras (paisaje,
   calle, ventana, nocturna urbana, Vía Láctea, acción, macro de mesa).
+
+## Modo analógico
+
+El selector **Digital / Analógica** cambia a las cámaras de película:
+**Nikon FM10, F-601 y F100**, con estos rollos: Ilford HP5 Plus y FP4 Plus,
+Fujifilm Neopan Acros II 100, Fomapan 100, 200 y 400, Kodak ColorPlus 200,
+Fujifilm 200, Kodak UltraMax 400, Kodak Portra 160, 400 y 800 y
+Lucky Color 200.
+
+- El ISO es el del rollo: por defecto a la **mitad de la caja** (+1 para el
+  negativo), o a la caja, o forzado/bajado según lo que permite cada rollo.
+- Corrige la **reciprocidad** en exposiciones largas con los datos de Ilford,
+  Foma y Fujifilm; si el fabricante no publica datos, avisa que hagas horquilla.
+- Usa las velocidades reales de cada cámara (la FM10 y la F-601 en pasos
+  enteros: indica cuánto afinar con el anillo).
+- **Compatibilidad de objetivos** según la tabla oficial de Nikon: los G no
+  se pueden usar en la FM10 ni en la F-601, y los E no funcionan en ninguna
+  cámara de película. La app lo avisa y no entrega receta.
 
 ## Criterio
 
@@ -76,7 +95,7 @@ una entrada de `SCENES`.
 ## Para actualizar la app
 
 Reemplazar los archivos en el repositorio y **subir el número de versión
-del caché en `sw.js`** (la constante `CACHE`, hoy `fotocalc-v1.1`). Sin
+del caché en `sw.js`** (la constante `CACHE`, hoy `fotocalc-v1.2`). Sin
 ese cambio, a quien ya la tenga instalada le sigue apareciendo la versión
 vieja.
 
@@ -86,7 +105,7 @@ Código bajo licencia **BSD 3-Clause** (archivo `LICENSE`). Nikon, NIKKOR y
 los nombres de los productos son marcas de Nikon Corporation; esta
 aplicación no está afiliada a Nikon.
 
-**Cita sugerida:** R. I. Canales M., *FotoCalc* v1.1, 2026.
+**Cita sugerida:** R. I. Canales M., *FotoCalc* v1.2, 2026.
 
 ## Qué hay en cada archivo
 
@@ -95,7 +114,8 @@ aplicación no está afiliada a Nikon.
 | `index.html` | La aplicación: interfaz y estilos |
 | `foto-i18n.js` | Textos ES/EN de la interfaz |
 | `foto-data.js` | Cámaras, objetivos y situaciones |
-| `foto-engine.js` | Cálculo de la receta, encuadre y profundidad de campo |
+| `foto-engine.js` | Cálculo de la receta digital, encuadre y profundidad de campo |
+| `foto-film.js` | Cámaras de película, rollos y cálculo analógico |
 | `foto-ui.js` | Desplegables, cálculo en vivo y presentación |
 | `manifest.json`, `sw.js` | Metadata PWA y caché sin conexión |
 | `icon-192.png`, `icon-512.png` | Íconos |

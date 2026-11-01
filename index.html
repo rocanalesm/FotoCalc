@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="FotoCalc">
-<meta name="description" content="Receta de exposición en modo M para Nikon D810 y D800 según objetivo y situación.">
+<meta name="description" content="Receta de exposición en modo M para Nikon digitales (D810, D800) y de película (FM10, F-601, F100) según objetivo, rollo y situación.">
 <title>FotoCalc</title>
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -102,6 +102,9 @@
   .sw b{font-size:16px}
   .calc-body{margin-top:8px;padding:10px;background:var(--panel3);border:1px solid var(--border);border-radius:8px;font-size:12.5px;
     font-family:"SF Mono",Menlo,Consolas,monospace;line-height:1.6;overflow-x:auto}
+  .seg.medium{margin-bottom:6px}
+  .seg.medium button{font-size:14px;padding:10px 6px}
+  .blocked{grid-column:1/-1;background:var(--bad-wash);border:1px solid var(--bad);color:var(--text);border-radius:10px;padding:14px;font-size:15px;line-height:1.5}
   .footer{text-align:center;color:var(--muted);font-size:11px;margin-top:20px;padding:14px;line-height:1.6}
   .footer a{color:var(--accent);text-decoration:none}
 </style>
@@ -112,7 +115,7 @@
     <img src="icon-192.png" alt="">
     <div>
       <h1>FotoCalc</h1>
-      <div class="sub" data-i18n="app.subtitle">Receta en modo M para tu cámara digital</div>
+      <div class="sub" data-i18n="app.subtitle">Receta en modo M · digital y película</div>
     </div>
   </div>
   <button id="lang-toggle" type="button">EN</button>
@@ -121,9 +124,14 @@
 
 <div class="card">
   <h2 data-i18n="card.gear">Equipo</h2>
+  <div class="seg medium" id="medium"><button type="button" data-v="digital" data-i18n="medium.digital">Digital</button><button type="button" data-v="film" data-i18n="medium.film">Analógica</button></div>
   <div class="row">
     <div><label for="cam" data-i18n="lbl.camera">Cámara</label><select id="cam"></select></div>
     <div><label for="lens" data-i18n="lbl.lens">Objetivo</label><select id="lens"></select></div>
+  </div>
+  <div class="row" id="film-wrap">
+    <div><label for="film" data-i18n="lbl.film">Rollo</label><select id="film"></select></div>
+    <div><label for="ei" data-i18n="lbl.ei">Sensibilidad de trabajo (EI)</label><select id="ei"></select></div>
   </div>
 </div>
 
@@ -138,8 +146,8 @@
       <div><label data-i18n="lbl.orient">Encuadre</label>
         <div class="seg" id="orient"><button type="button" data-v="h" data-i18n="orient.h">Horizontal</button><button type="button" data-v="v" data-i18n="orient.v">Vertical</button></div></div>
     </div>
-    <label data-i18n="lbl.crop">Zona de imagen</label>
-    <div class="seg" id="crop"><button type="button" data-v="1" data-i18n="crop.1">FX</button><button type="button" data-v="1.2" data-i18n="crop.12">1.2×</button><button type="button" data-v="1.5" data-i18n="crop.15">DX</button></div>
+    <div id="crop-wrap"><label data-i18n="lbl.crop">Zona de imagen</label>
+    <div class="seg" id="crop"><button type="button" data-v="1" data-i18n="crop.1">FX</button><button type="button" data-v="1.2" data-i18n="crop.12">1.2×</button><button type="button" data-v="1.5" data-i18n="crop.15">DX</button></div></div>
     <div id="focal-wrap"><label for="focal"><span data-i18n="lbl.focal">Focal</span> <span class="val" id="focal-val"></span></label><input type="range" id="focal" step="1"></div>
     <label for="ev"><span data-i18n="lbl.ev">Luz de la escena</span> <span class="val" id="ev-val"></span></label>
     <input type="range" id="ev" step="0.5">
@@ -151,7 +159,12 @@
 <div class="card">
   <h2 data-i18n="card.recipe">Receta (modo M)</h2>
   <div class="tiles" id="tiles"></div>
-  <table class="props" id="recipe-rows"></table>
+  <div id="recipe-extra"><table class="props" id="recipe-rows"></table></div>
+</div>
+
+<div class="card" id="film-card">
+  <h2 data-i18n="card.film">El rollo</h2>
+  <div id="film-body"></div>
 </div>
 
 <div class="card" id="warn-card">
@@ -159,23 +172,23 @@
   <ul class="warn" id="warn-list"></ul>
 </div>
 
-<div class="card">
+<div class="card" id="frame-card">
   <h2 data-i18n="card.frame">Encuadre y profundidad de campo</h2>
   <div id="frame-body"></div>
 </div>
 
-<div class="card">
+<div class="card" id="switch-card">
   <h2 data-i18n="card.switches">Interruptores del objetivo</h2>
   <div class="switches" id="switches"></div>
   <p class="muted" id="lens-tip"></p>
 </div>
 
-<div class="card">
+<div class="card" id="tips-card">
   <h2 data-i18n="card.tips">Consejos</h2>
   <ul class="list" id="tips"></ul>
 </div>
 
-<div class="card">
+<div class="card" id="cam-card">
   <h2 data-i18n="card.camera">Notas de la cámara</h2>
   <ul class="list" id="cam-notes"></ul>
   <details class="calc" style="margin-top:10px">
@@ -185,13 +198,14 @@
 </div>
 
 <div class="footer">
-  <span data-i18n="footer.made">Proyecto Nikon · Roberto Canales</span> &middot; <span data-i18n="footer.ver">v1.1</span>
+  <span data-i18n="footer.made">Proyecto Nikon · Roberto Canales</span> &middot; <span data-i18n="footer.ver">v1.2</span>
 </div>
 </main>
 
 <script src="foto-i18n.js"></script>
 <script src="foto-data.js"></script>
 <script src="foto-engine.js"></script>
+<script src="foto-film.js"></script>
 <script src="foto-ui.js"></script>
 </body>
 </html>
